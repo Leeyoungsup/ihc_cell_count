@@ -12,19 +12,21 @@ FORMATS = 'bmp', 'dng', 'jpeg', 'jpg', 'mpo', 'png', 'tif', 'tiff', 'webp'
 
 
 class Dataset(data.Dataset):
-    def __init__(self, filenames, input_size, params, augment):
+    def __init__(self, filenames, input_size, params, augment, labels=None):
         self.params = params
         self.mosaic = augment
         self.augment = augment
         self.input_size = input_size
-
-        # Read labels
-        labels = self.load_label(filenames)
-        self.labels = list(labels.values())
-        self.filenames = list(labels.keys())  # update
-        self.n = len(self.filenames)  # number of samples
+        if labels is not None:
+            self.labels = labels
+            self.filenames = filenames
+            self.n = len(self.filenames)
+        else:
+            loaded = self.load_label(filenames)
+            self.labels = list(loaded.values())
+            self.filenames = list(loaded.keys())
+            self.n = len(self.filenames)
         self.indices = range(self.n)
-        # Albumentations (optional, only used if package is installed)
         self.albumentations = Albumentations()
 
     def __getitem__(self, index):
