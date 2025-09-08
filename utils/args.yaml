@@ -18,8 +18,7 @@ flip_lr: 0.50000000000            # image flip left-right (probability)
 mosaic: 1.000000000000            # image mosaic (probability)
 mix_up: 0.000000000000            # image mix-up (probability)
 names:
-  0: none
-  1: pd-l1 negative tumor cell
-  2: pd-l1 positive tumor cell
-  3: non-tumor cell
+  0: pd-l1 negative tumor cell
+  1: pd-l1 positive tumor cell
+  2: non-tumor cell
 

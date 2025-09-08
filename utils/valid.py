@@ -95,9 +95,9 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
         w_box = w * img.shape[2]
         h_box = h * img.shape[1]
         
-        if class_id == 1: #pd-l1 negative tumor cell
+        if class_id == 0: #pd-l1 negative tumor cell
             color = 'blue'
-        elif class_id == 2: #pd-l1 positive tumor cell
+        elif class_id == 1: #pd-l1 positive tumor cell
             color = 'red'
         else: #non-tumor cell
             color = 'green'
@@ -133,9 +133,9 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
                 w_pred = x2 - x1
                 h_pred = y2 - y1
                 
-                if cls_id.item() == 1: #pd-l1 negative tumor cell
+                if cls_id.item() == 0: #pd-l1 negative tumor cell
                     color = 'blue'
-                elif cls_id.item() == 2: #pd-l1 positive tumor cell
+                elif cls_id.item() == 1: #pd-l1 positive tumor cell
                     color = 'red'
                 else: #non-tumor cell
                     color = 'green'
@@ -176,12 +176,12 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
     
     # 저장
     if save_dir and epoch:
-        save_path = os.path.join(save_dir, f'validation_comparison_epoch_{epoch}_sample_{idx+1}.png')
+        save_path = os.path.join(save_dir, f'validation_comparison_epoch_{epoch}.png')
         plt.savefig(save_path, dpi=150, bbox_inches='tight')
         print(f"✅ 비교 이미지 저장: {save_path}")
     
     # plt.show()
-    
+    plt.clf()
     
     
     
