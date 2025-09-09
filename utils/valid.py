@@ -72,7 +72,7 @@ Best mAP@0.5:0.95: {max(val_maps):.4f} (Epoch {val_maps.index(max(val_maps))+1})
     plt.close()
 
 
-def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf_threshold=0.01, iou_threshold=0.65, epoch=None, save_dir=None):
+def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf_threshold=0.1, iou_threshold=0.3, epoch=None, save_dir=None):
     """실제 라벨과 예측 라벨을 subplot으로 좌우에 표시하는 함수"""
     if len(dataset) <= idx:
         print(f"경고: 데이터셋이 비어 있거나 idx {idx}가 데이터셋 크기({len(dataset)})보다 큽니다.")
@@ -123,7 +123,6 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
         img_input = img.unsqueeze(0).to(device).float() / 255
         with torch.amp.autocast('cuda'):
             pred = model(img_input)
-        print(pred.shape)
 
         # NMS 적용
         results = util.non_max_suppression(pred, confidence_threshold=conf_threshold, iou_threshold=iou_threshold)
@@ -340,8 +339,8 @@ def compute_validation_metrics_with_kappa(model, val_loader, device, params):
                 pred = model(images)
             
             # NMS 적용
-            results = util.non_max_suppression(pred, confidence_threshold=0.25, iou_threshold=0.45)
-            
+            results = util.non_max_suppression(pred, confidence_threshold=0.1, iou_threshold=0.3)
+
             # 각 이미지에 대해 grid 기반 라벨링
             for i in range(len(images)):
                 gt_grid = np.zeros((grid_size, grid_size), dtype=int)  # 0: 배경, 1: negative, 2: positive
