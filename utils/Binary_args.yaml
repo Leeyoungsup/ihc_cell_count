@@ -1,4 +1,4 @@
-min_lr: 0.000200000000            # initial learning rate
+min_lr: 0.00002000000            # initial learning rate
 max_lr: 0.002000000000            # maximum learning rate
 momentum: 0.9370000000            # SGD momentum/Adam beta1
 weight_decay: 0.000500            # optimizer weight decay
@@ -19,4 +19,3 @@ mosaic: 1.000000000000            # image mosaic (probability)
 mix_up: 0.000000000000            # image mix-up (probability)
 names:
   0: nucleus
-
