@@ -83,7 +83,7 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
     
     # 하나의 figure에 2개의 subplot 생성 (1행 2열)
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
-    
+    img = img.cpu() / 255.
     # Subplot 1: Ground Truth (실제 라벨)
     ax1.imshow(img.permute(1, 2, 0).cpu().numpy())
     
@@ -120,7 +120,7 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
     
     prediction_count = 0
     with torch.no_grad():
-        img_input = img.unsqueeze(0).to(device).float() / 255
+        img_input = img.unsqueeze(0).to(device)
         with torch.amp.autocast('cuda'):
             pred = model(img_input)
 
@@ -163,9 +163,7 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
     
     # 범례 추가
     legend_elements = [
-        patches.Patch(color='blue', label='PD-L1 Negative Tumor Cell (Class 1)'),
-        patches.Patch(color='red', label='PD-L1 Positive Tumor Cell (Class 2)'),
-        patches.Patch(color='green', label='Non-tumor Cell (Class 0)')
+        patches.Patch(color='blue', label='nucleus'),
     ]
     fig.legend(handles=legend_elements, loc='lower center', ncol=3, 
                bbox_to_anchor=(0.5, 0.02), fontsize=12)

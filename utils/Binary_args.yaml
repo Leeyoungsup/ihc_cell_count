@@ -1,10 +1,10 @@
-min_lr: 0.00002000000            # initial learning rate
+min_lr: 0.0002000000            # initial learning rate
 max_lr: 0.002000000000            # maximum learning rate
 momentum: 0.9370000000            # SGD momentum/Adam beta1
 weight_decay: 0.000500            # optimizer weight decay
 warmup_epochs: 3.00000            # warmup epochs
 box: 7.500000000000000            # box loss gain
-cls: 0.500000000000000            # cls loss gain
+cls: 0.500000000000000            # cls loss gain (should not be 0 even for single class)
 dfl: 1.500000000000000            # dfl loss gain
 hsv_h: 0.0150000000000            # image HSV-Hue augmentation (fraction)
 hsv_s: 0.7000000000000            # image HSV-Saturation augmentation (fraction)
