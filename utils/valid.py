@@ -163,7 +163,8 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
     
     # 범례 추가
     legend_elements = [
-        patches.Patch(color='blue', label='nucleus'),
+        patches.Patch(color='blue', label='negative tumor cell'),
+        patches.Patch(color='red', label='positive tumor cell'),
     ]
     fig.legend(handles=legend_elements, loc='lower center', ncol=3, 
                bbox_to_anchor=(0.5, 0.02), fontsize=12)
