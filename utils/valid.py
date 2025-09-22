@@ -72,7 +72,7 @@ Best mAP@0.5:0.95: {max(val_maps):.4f} (Epoch {val_maps.index(max(val_maps))+1})
     plt.close()
 
 
-def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf_threshold=0.1, iou_threshold=0.3, epoch=None, save_dir=None):
+def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf_threshold=0.5, iou_threshold=0.3, epoch=None, save_dir=None):
     """실제 라벨과 예측 라벨을 subplot으로 좌우에 표시하는 함수"""
     if len(dataset) <= idx:
         print(f"경고: 데이터셋이 비어 있거나 idx {idx}가 데이터셋 크기({len(dataset)})보다 큽니다.")
@@ -165,6 +165,7 @@ def visualize_ground_truth_and_prediction_separately(model, dataset, idx=0, conf
     legend_elements = [
         patches.Patch(color='blue', label='negative tumor cell'),
         patches.Patch(color='red', label='positive tumor cell'),
+        patches.Patch(color='green', label='non-tumor cell'),
     ]
     fig.legend(handles=legend_elements, loc='lower center', ncol=3, 
                bbox_to_anchor=(0.5, 0.02), fontsize=12)
